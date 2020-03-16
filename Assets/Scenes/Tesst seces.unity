@@ -875,6 +875,11 @@ PrefabInstance:
       propertyPath: Controller
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6321778082817886061, guid: 9daf76f5951f48a4ebf172c8f0f4e5f4,
+        type: 3}
+      propertyPath: shootingDelay
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6879816764853786592, guid: 9daf76f5951f48a4ebf172c8f0f4e5f4,
         type: 3}
       propertyPath: m_Constraints
@@ -1022,6 +1027,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -360
+      objectReference: {fileID: 0}
+    - target: {fileID: 8121481706094069126, guid: 39015b3a9e0de97419186679a91f0cd7,
+        type: 3}
+      propertyPath: shootingDelay
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 39015b3a9e0de97419186679a91f0cd7, type: 3}

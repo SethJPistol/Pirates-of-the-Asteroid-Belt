@@ -14,16 +14,22 @@ public class Asteroid : MonoBehaviour
 
 	[HideInInspector]
 	public Rigidbody rb;
+	private Vector3 Velocity;
 
 	public AsteroidType Type;
 
 	[HideInInspector]
-	public delegate void WrapHandler(Vector3 Position);	//Delegate type to call when wrapping around the screen
+	public delegate void WrapHandler(GameObject Object);	//Delegate type to call when wrapping around the screen
 	private WrapHandler Handler = null;					//A handler to hold the function
 
 	private void Awake()
 	{
 		rb = GetComponent<Rigidbody>();
+	}
+
+	private void Update()
+	{
+		Velocity = rb.velocity;
 	}
 
 	public void SetWrapHandler(WrapHandler WrapFunction)
@@ -65,22 +71,22 @@ public class Asteroid : MonoBehaviour
 		Asteroid1.Type = AsteroidType.Small;
 		Asteroid1.SetWrapHandler(Handler);
 		Asteroid1.transform.position = rb.position;
-		Asteroid1.transform.rotation = Quaternion.LookRotation(rb.velocity.normalized);
+		Asteroid1.transform.rotation = Quaternion.LookRotation(Velocity.normalized);
 		Asteroid1.transform.Rotate(0.0f, 90.0f, 0.0f);
-		Asteroid1.rb.velocity = (rb.velocity.magnitude * Asteroid1.transform.forward);
+		Asteroid1.rb.velocity = (Velocity.magnitude * Asteroid1.transform.forward.normalized);
 
 		Asteroid Asteroid2 = Instantiate(SmallAsteroidPrefab).GetComponent<Asteroid>();
 		Asteroid2.Type = AsteroidType.Small;
 		Asteroid2.SetWrapHandler(Handler);
 		Asteroid2.transform.position = transform.position;
-		Asteroid2.transform.rotation = Quaternion.LookRotation(rb.velocity.normalized);
+		Asteroid2.transform.rotation = Quaternion.LookRotation(Velocity.normalized);
 		Asteroid2.transform.Rotate(0.0f, -90.0f, 0.0f);
-		Asteroid2.rb.velocity = (rb.velocity.magnitude * Asteroid2.transform.forward);
+		Asteroid2.rb.velocity = (Velocity.magnitude * Asteroid2.transform.forward.normalized);
 	}
 
 	private void OnBecameInvisible()
 	{
 		if (Handler != null)
-			Handler(transform.position);
+			Handler(gameObject);
 	}
 }
