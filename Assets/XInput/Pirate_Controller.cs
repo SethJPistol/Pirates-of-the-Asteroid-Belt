@@ -9,7 +9,8 @@ public class Pirate_Controller : MonoBehaviour
     [SerializeField] XboxController Controller = XboxController.All;
     //speed can be changed in editor and by other scripts if there are powerups
     public float MoveSpeed =  500;
-
+    public float MaxSpeed = 30;
+    public float turnspeed = 2;
     //spawning points for respawning
     private Vector3 SpawnPos;
     private Quaternion SpawnRot;
@@ -69,11 +70,19 @@ public class Pirate_Controller : MonoBehaviour
         // get move input
         Vector3 moveInput = new Vector3(XCI.GetAxisRaw(XboxAxis.LeftStickX, Controller), 0.0f, XCI.GetAxisRaw(XboxAxis.LeftStickY, Controller));
         rb.AddForce  (moveInput.normalized * MoveSpeed);
-        
+        if(rb.velocity.magnitude > MaxSpeed)
+        {
+            rb.AddForce(moveInput.normalized * -MoveSpeed);
+        }
+        //looking
+        //Vector3 lookinput = new Vector3(XCI.GetAxisRaw(XboxAxis.RightStickX, Controller), 0.0f, XCI.GetAxisRaw(XboxAxis.RightStickY, Controller));
+
         // if input detected look in direction player is moving
         if (moveInput != Vector3.zero)
         {
-            transform.rotation = Quaternion.LookRotation(moveInput);
+            Quaternion targetRotation = Quaternion.LookRotation(moveInput);
+            //gameObject.transform.rotation. = Quaternion.LookRotation(moveInput);
+            rb.transform.rotation = Quaternion.Slerp(rb.transform.rotation, targetRotation, turnspeed * Time.deltaTime);
         }
         //rb.velocity = (moveInput * MoveSpeed);
 
