@@ -200,6 +200,7 @@ MonoBehaviour:
   MoveSpeed: 500
   cannonRight: {fileID: 0}
   cannonLeft: {fileID: 0}
+  bulletSpeed: 0
   shootingDelay: 2
   canShootAgain: 1
 --- !u!54 &6879816764853786592
