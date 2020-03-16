@@ -14,6 +14,9 @@ public class Pirate_Controller : MonoBehaviour
     //spawning points for respawning
     private Vector3 SpawnPos;
     private Quaternion SpawnRot;
+    private Vector3 spawnvel;
+    //player lives
+    public int PlayerLives = 3;
 
     //debug checking controllers connected
     private bool CheckNumControlers;
@@ -102,6 +105,7 @@ public class Pirate_Controller : MonoBehaviour
                 StartCoroutine(shootdelay());
             }
         }
+
     }
 
     public IEnumerator shootdelay()
@@ -109,6 +113,16 @@ public class Pirate_Controller : MonoBehaviour
         canShootAgain = false;
         yield return new WaitForSeconds(shootingDelay);
         canShootAgain = true;
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag != "Player")
+        {
+            PlayerLives--;
+            gameObject.transform.position = SpawnPos;
+            gameObject.transform.rotation = SpawnRot;
+            rb.velocity = spawnvel;
+        }
     }
 
 
