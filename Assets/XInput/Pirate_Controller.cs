@@ -23,6 +23,8 @@ public class Pirate_Controller : MonoBehaviour
     public GameObject cannonRight;
     public GameObject cannonLeft;
 
+    public float bulletSpeed;
+
     //delay between shots
     public float shootingDelay = 2.0f;
     [HideInInspector] public bool canShootAgain = true;
@@ -79,7 +81,7 @@ public class Pirate_Controller : MonoBehaviour
         {
             if(canShootAgain)
             {
-                cannonRight.GetComponent<Cannon>().ShootBullet(10.0f);
+                cannonRight.GetComponent<Cannon>().ShootBullet(bulletSpeed);
                 StartCoroutine(shootdelay());
             }
         }
@@ -87,7 +89,7 @@ public class Pirate_Controller : MonoBehaviour
         {
             if (canShootAgain)
             {
-                cannonLeft.GetComponent<Cannon>().ShootBullet(10.0f);
+                cannonLeft.GetComponent<Cannon>().ShootBullet(bulletSpeed);
                 StartCoroutine(shootdelay());
             }
         }
