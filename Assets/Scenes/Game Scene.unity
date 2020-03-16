@@ -240,6 +240,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16a575f02677b364cb41c3b9ab068c76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Camera: {fileID: 1631550176}
   AsteroidPrefab: {fileID: 6979801392103637916, guid: 25d8677fda0b54f419f8a597987035f1,
     type: 3}
 --- !u!4 &105985294
