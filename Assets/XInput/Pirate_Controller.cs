@@ -149,9 +149,9 @@ public class Pirate_Controller : MonoBehaviour
     }
     public IEnumerator Immunity()
     {
-		gameObject.GetComponent<BoxCollider>().enabled = false;
+		gameObject.GetComponent<Collider>().enabled = false;
 		yield return new WaitForSeconds(RespawnImmunity);
-        gameObject.GetComponent<BoxCollider>().enabled = true;
+        gameObject.GetComponent<Collider>().enabled = true;
     }
 
 	public IEnumerator MeshFlash(MeshRenderer mesh)
