@@ -11,6 +11,7 @@ public class Asteroid : MonoBehaviour
 	}
 
 	public GameObject SmallAsteroidPrefab;
+	public GameObject ExplosionPrefab;
 
 	[HideInInspector]
 	public Rigidbody rb;
@@ -50,6 +51,8 @@ public class Asteroid : MonoBehaviour
 		if (collision.gameObject.CompareTag("Bullet"))
 		{
 			mysource.PlayOneShot(astExplode, 0.5f);
+			Instantiate(ExplosionPrefab, gameObject.transform.position, gameObject.transform.rotation);
+
 			if (Type == AsteroidType.Large)
 			{
 				spawnPowerUp();
@@ -65,6 +68,8 @@ public class Asteroid : MonoBehaviour
 		else if (collision.gameObject.CompareTag("Player"))
 		{
 			mysource.PlayOneShot(astExplode, 0.25f);
+			Instantiate(ExplosionPrefab, gameObject.transform.position, gameObject.transform.rotation);
+
 			if (Type == AsteroidType.Large)
 			{
 				
