@@ -12,8 +12,13 @@ public class Speed_Power_up : MonoBehaviour
     [HideInInspector]public float OriginalMoveSpeed;
     [HideInInspector]public float OriginalMaxSpeed;
     Collider player;
-   
-    
+    AudioSource mysource;
+    public AudioClip SpeedBoost;
+
+    private void Start()
+    {
+        mysource = GetComponent<AudioSource>();
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
@@ -27,8 +32,9 @@ public class Speed_Power_up : MonoBehaviour
             StartCoroutine(PowerUpWait());
             gameObject.GetComponent<MeshRenderer>().enabled = false;
             gameObject.GetComponent<BoxCollider>().enabled = false;
+            mysource.PlayOneShot(SpeedBoost, 0.5f);
 
-            
+
         }
         
     }
