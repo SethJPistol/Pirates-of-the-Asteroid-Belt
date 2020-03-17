@@ -285,7 +285,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 1, b: 1, a: 1}
+      maxColor: {r: 0, g: 0.18823528, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -347,7 +347,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 3.07
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -928,7 +928,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 17.33
+      scalar: 45
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -4771,7 +4771,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: cfc6091d14077364abcb036c19da49d4, type: 2}
+  - {fileID: 2100000, guid: b4d8055067ce04d4c98367d69c10b358, type: 2}
   - {fileID: 2100000, guid: cfc6091d14077364abcb036c19da49d4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -4937,6 +4937,7 @@ MonoBehaviour:
   MaxSpeed: 30
   turnspeed: 2
   PlayerLives: 3
+  RespawnImmunity: 2
   cannonRight: {fileID: 4903254112042315230}
   cannonLeft: {fileID: 6570244231051200323}
   bulletSpeed: 10
@@ -5321,7 +5322,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 1, b: 1, a: 1}
+      maxColor: {r: 0, g: 0.18823528, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -5383,7 +5384,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 3.07
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -5964,7 +5965,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 17.33
+      scalar: 45
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -9807,7 +9808,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: cfc6091d14077364abcb036c19da49d4, type: 2}
+  - {fileID: 2100000, guid: b4d8055067ce04d4c98367d69c10b358, type: 2}
   - {fileID: 2100000, guid: cfc6091d14077364abcb036c19da49d4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
