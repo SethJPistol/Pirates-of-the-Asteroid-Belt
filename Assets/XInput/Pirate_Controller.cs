@@ -112,6 +112,7 @@ public class Pirate_Controller : MonoBehaviour
             {
                 cannonLeft.GetComponent<Cannon>().ShootBullet(bulletSpeed);
                 StartCoroutine(shootdelay());
+                mysource.PlayOneShot(Shot, 1.0f);
             }
         }
     }
