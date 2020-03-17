@@ -34,10 +34,6 @@ public class Pirate_Controller : MonoBehaviour
     public float shootingDelay = 2.0f;
     [HideInInspector] public bool canShootAgain = true;
 
-	[HideInInspector]
-	public delegate void WrapHandler(GameObject Object);    //Delegate type to call when wrapping around the screen
-	private WrapHandler Handler = null;						//A handler to hold the function
-
     // sounds stuff
     AudioSource mysource;
     
@@ -118,24 +114,11 @@ public class Pirate_Controller : MonoBehaviour
                 StartCoroutine(shootdelay());
             }
         }
-        if(PlayerLives <= 0)
-        {
-
-        }
-        
-        
     }
-
-	public void SetWrapHandler(WrapHandler WrapFunction)
-	{
-		Handler = WrapFunction;
-	}
 
 	private void OnBecameInvisible()	//When this object leaves the camera's view,
 	{
-		if (Handler != null)		//If the handler has been set,
-			Handler(gameObject);    //Make the object wrap back around
-		Debug.Log("Wrap!");
+		ScreenWrap.Instance.Wrap(gameObject);	//Wrap
 	}
 
 	public IEnumerator shootdelay()
@@ -152,14 +135,15 @@ public class Pirate_Controller : MonoBehaviour
             gameObject.transform.position = SpawnPos;
             gameObject.transform.rotation = SpawnRot;
             rb.velocity = spawnvel;
-            gameObject.GetComponent<BoxCollider>().enabled = false;
+			StartCoroutine(Immunity());
             mysource.PlayOneShot(PlayerDeath, 1.0f);
             
         }
     }
     public IEnumerator Immunity()
     {
-        yield return new WaitForSeconds(RespawnImmunity);
+		gameObject.GetComponent<BoxCollider>().enabled = false;
+		yield return new WaitForSeconds(RespawnImmunity);
         gameObject.GetComponent<BoxCollider>().enabled = true;
     }
 
