@@ -17,6 +17,7 @@ public class Pirate_Controller : MonoBehaviour
     private Vector3 spawnvel;
     //player lives
     public int PlayerLives = 3;
+    public float RespawnImmunity = 2;
 
     //debug checking controllers connected
     private bool CheckNumControlers;
@@ -32,6 +33,7 @@ public class Pirate_Controller : MonoBehaviour
     //delay between shots
     public float shootingDelay = 2.0f;
     [HideInInspector] public bool canShootAgain = true;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -105,7 +107,10 @@ public class Pirate_Controller : MonoBehaviour
                 StartCoroutine(shootdelay());
             }
         }
+        if(PlayerLives <= 0)
+        {
 
+        }
     }
 
     public IEnumerator shootdelay()
@@ -122,8 +127,14 @@ public class Pirate_Controller : MonoBehaviour
             gameObject.transform.position = SpawnPos;
             gameObject.transform.rotation = SpawnRot;
             rb.velocity = spawnvel;
+            gameObject.GetComponent<BoxCollider>().enabled = false;
             
         }
     }
-   
+    public IEnumerator Immunity()
+    {
+        yield return new WaitForSeconds(RespawnImmunity);
+        gameObject.GetComponent<BoxCollider>().enabled = true;
+    }
+
 }
