@@ -12,12 +12,6 @@ public class Cannon : MonoBehaviour
     {
         rigb = gameObject.GetComponent<Rigidbody>();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
     public void ShootBullet(float bulletSpeed)
     {
         //canShootAgain = false;
@@ -26,4 +20,5 @@ public class Cannon : MonoBehaviour
         // yield return new WaitForSeconds(shootingDelay);
         //canShootAgain = true;
     }
+
 }
