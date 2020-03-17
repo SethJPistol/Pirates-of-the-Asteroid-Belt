@@ -57,7 +57,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1403421954489619473}
   m_LocalRotation: {x: -0, y: -0, z: -0.0000002533197, w: -1}
-  m_LocalPosition: {x: 6, y: 0, z: 0}
+  m_LocalPosition: {x: 6, y: 0, z: 0.052}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 708735412461575788}
@@ -84,6 +84,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Controller: 1
   MoveSpeed: 10
+  MaxSpeed: 30
+  turnspeed: 2
   cannonRight: {fileID: 5569805839715831010}
   cannonLeft: {fileID: 7406811433181461775}
   bulletSpeed: 20
