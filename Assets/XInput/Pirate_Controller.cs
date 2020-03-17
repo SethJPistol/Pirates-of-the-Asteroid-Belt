@@ -38,6 +38,11 @@ public class Pirate_Controller : MonoBehaviour
 	public delegate void WrapHandler(GameObject Object);    //Delegate type to call when wrapping around the screen
 	private WrapHandler Handler = null;						//A handler to hold the function
 
+    // sounds stuff
+    AudioSource mysource;
+    
+    public AudioClip Shot;
+    public AudioClip PlayerDeath;
 
 	// Start is called before the first frame update
 	void Start()
@@ -70,7 +75,8 @@ public class Pirate_Controller : MonoBehaviour
         rb = gameObject.GetComponent<Rigidbody>();
         cannonRight.GetComponent<Cannon>();
         cannonLeft.GetComponent<Cannon>();
-        
+        mysource = GetComponent<AudioSource>();
+
     }
 
     // Update is called once per frame
@@ -101,6 +107,7 @@ public class Pirate_Controller : MonoBehaviour
             {
                 cannonRight.GetComponent<Cannon>().ShootBullet(bulletSpeed);
                 StartCoroutine(shootdelay());
+                mysource.PlayOneShot(Shot, 1.0f);
             }
         }
         if (XCI.GetAxis(XboxAxis.LeftTrigger, Controller) > 0.5)
@@ -115,6 +122,8 @@ public class Pirate_Controller : MonoBehaviour
         {
 
         }
+        
+        
     }
 
 	public void SetWrapHandler(WrapHandler WrapFunction)
@@ -144,6 +153,7 @@ public class Pirate_Controller : MonoBehaviour
             gameObject.transform.rotation = SpawnRot;
             rb.velocity = spawnvel;
             gameObject.GetComponent<BoxCollider>().enabled = false;
+            mysource.PlayOneShot(PlayerDeath, 1.0f);
             
         }
     }
