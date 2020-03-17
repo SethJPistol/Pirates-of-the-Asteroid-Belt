@@ -18,6 +18,8 @@ public class Asteroid : MonoBehaviour
 
 	public AsteroidType Type;
 
+	public float MaxSpeed = 1.5f;
+
 	[HideInInspector]
 	public delegate void WrapHandler(GameObject Object);	//Delegate type to call when wrapping around the screen
 	private WrapHandler Handler = null;					//A handler to hold the function

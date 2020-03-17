@@ -6,7 +6,15 @@ public class GameManager : MonoBehaviour
 {
 	public Camera Camera;
 
+	public GameObject Player1;
+	public GameObject Player2;
+
+	public Collider Player1SafeZone;
+	public Collider Player2SafeZone;
+
 	public GameObject AsteroidPrefab;
+
+	public int StartingAsteroidAmount = 3;
 
 	private Vector3[] CameraFrustumCorners; //0 = bottom left, 1 = top left, 2 = top right, 3 = bottom right
 	private float SceneWidth;
@@ -14,18 +22,27 @@ public class GameManager : MonoBehaviour
 
 	void Start()
     {
-		Asteroid StartingAsteroid = Instantiate(AsteroidPrefab).GetComponent<Asteroid>();
-		StartingAsteroid.rb.velocity = (new Vector3(1.5f, 0, 1.5f));
-		StartingAsteroid.SetWrapHandler(Wrap);
-
 		CameraFrustumCorners = new Vector3[4];
 		Camera.CalculateFrustumCorners(new Rect(0, 0, 1, 1), 11, Camera.MonoOrStereoscopicEye.Mono, CameraFrustumCorners);
 		for (int i = 0; i < 4; ++i)
 			CameraFrustumCorners[i] *= 0.95f;	//Offset the corners inwards a little
-		SceneWidth = (CameraFrustumCorners[2].x * 2.0f);
-		SceneHeight = (CameraFrustumCorners[2].y * 2.0f);
+		SceneWidth = (CameraFrustumCorners[2].x);
+		SceneHeight = (CameraFrustumCorners[2].y);
 
-		//Find all asteroids currently in scene and set up their wrap
+		//Spawn a few asteroids around on the screen
+		for (int i = 0; i < StartingAsteroidAmount; ++i)
+		{
+			Vector3 Spawnpoint = new Vector3(Random.Range(-SceneWidth, SceneWidth), 0.0f, Random.Range(-SceneHeight, SceneHeight));
+			bool Spawning = true;
+			while (Spawning)
+			{
+				if (Player1SafeZone.bounds.Contains(Spawnpoint) || Player2SafeZone.bounds.Contains(Spawnpoint))    //If too close to a player,
+					Spawnpoint = new Vector3(Random.Range(-SceneWidth, SceneWidth), 0.0f, Random.Range(-SceneHeight, SceneHeight)); //Randomise again
+				else
+					Spawning = false;
+			}
+			SpawnAsteroid(Spawnpoint);
+		}
 	}
 
     // Update is called once per frame
@@ -39,6 +56,22 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
+	private void SpawnAsteroid()
+	{
+
+	}
+
+	private void SpawnAsteroid(Vector3 StartPosition)
+	{
+		Asteroid NewAsteroid = Instantiate(AsteroidPrefab).GetComponent<Asteroid>();
+		NewAsteroid.Type = Asteroid.AsteroidType.Large;
+		NewAsteroid.transform.position = StartPosition;
+		Vector3 Direction = new Vector3(Random.Range(-1.0f, 1.0f), 0.0f, Random.Range(-1.0f, 1.0f));
+		NewAsteroid.transform.rotation = Quaternion.LookRotation(Direction.normalized);
+		NewAsteroid.rb.velocity = NewAsteroid.MaxSpeed * NewAsteroid.transform.forward.normalized;
+		NewAsteroid.SetWrapHandler(Wrap);
+	}
+
 	public void Wrap(GameObject Object)
 	{
 		//Check that the object is still active
@@ -46,22 +79,22 @@ public class GameManager : MonoBehaviour
 		{
 			Vector3 Position = Object.transform.position;
 
-			if (Position.x < -(SceneWidth / 2.0f))  //Off the left side
+			if (Position.x < -(SceneWidth))  //Off the left side
 			{
-				Object.transform.position += new Vector3((SceneWidth), 0.0f, 0.0f);
+				Object.transform.position += new Vector3(SceneWidth * 2.0f, 0.0f, 0.0f);
 			}
-			else if (Position.x > (SceneWidth / 2.0f))	//Off the right side
+			else if (Position.x > (SceneWidth))	//Off the right side
 			{
-				Object.transform.position += new Vector3(-(SceneWidth), 0.0f, 0.0f);
+				Object.transform.position += new Vector3(-SceneWidth * 2.0f, 0.0f, 0.0f);
 			}
 
-			if (Position.z < -(SceneHeight / 2.0f))  //Off the bottom
+			if (Position.z < -(SceneHeight))  //Off the bottom
 			{
-				Object.transform.position += new Vector3(0.0f, 0.0f, (SceneHeight));
+				Object.transform.position += new Vector3(0.0f, 0.0f, SceneHeight * 2.0f);
 			}
-			else if (Position.z > (SceneHeight / 2.0f))	//Off the top
+			else if (Position.z > (SceneHeight))	//Off the top
 			{
-				Object.transform.position += new Vector3(0.0f, 0.0f, -(SceneHeight));
+				Object.transform.position += new Vector3(0.0f, 0.0f, -SceneHeight * 2.0f);
 			}
 		}
 	}
