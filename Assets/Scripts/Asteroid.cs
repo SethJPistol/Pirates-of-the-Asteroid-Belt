@@ -21,13 +21,18 @@ public class Asteroid : MonoBehaviour
 	public float MaxSpeed = 1.5f;
 
 	AudioSource mysource;
-	AudioClip astExplode;
+	public AudioClip astExplode;
 
 	private void Awake()
 	{
 		rb = GetComponent<Rigidbody>();
+		
+	}
+	private void Start()
+	{
 		mysource = GetComponent<AudioSource>();
 	}
+
 
 	private void Update()
 	{
@@ -38,8 +43,10 @@ public class Asteroid : MonoBehaviour
 	{
 		if (collision.gameObject.CompareTag("Bullet"))
 		{
+			mysource.PlayOneShot(astExplode, 0.5f);
 			if (Type == AsteroidType.Large)
 			{
+				
 				Split();
 				Destroy(gameObject);
 			}
@@ -47,12 +54,14 @@ public class Asteroid : MonoBehaviour
 			{
 				Destroy(gameObject);
 			}
-			mysource.PlayOneShot(astExplode, 0.25f);
+			
 		}
 		else if (collision.gameObject.CompareTag("Player"))
 		{
+			mysource.PlayOneShot(astExplode, 0.25f);
 			if (Type == AsteroidType.Large)
 			{
+				
 				Split();
 				Destroy(gameObject);
 			}
@@ -60,7 +69,7 @@ public class Asteroid : MonoBehaviour
 			{
 				Destroy(gameObject);
 			}
-			mysource.PlayOneShot(astExplode, 0.25f);
+			
 		}
 	}
 
