@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
 	public float AsteroidSpawnTime = 5.0f;
 	private float AsteroidSpawnTimer;
 
+	public RectTransform WinScreen;
 	public Image Player1LivesDisplay;
 	public Image Player2LivesDisplay;
 
@@ -34,7 +35,7 @@ public class GameManager : MonoBehaviour
 		AsteroidSpawnTimer = AsteroidSpawnTime;
 
 		Player1Controller = Player1.GetComponent<Pirate_Controller>();
-		Player2Controller = Player1.GetComponent<Pirate_Controller>();
+		Player2Controller = Player2.GetComponent<Pirate_Controller>();
 
 		CameraFrustumCorners = new Vector3[4];
 		Camera.CalculateFrustumCorners(new Rect(0, 0, 1, 1), 24, Camera.MonoOrStereoscopicEye.Mono, CameraFrustumCorners);
@@ -77,7 +78,7 @@ public class GameManager : MonoBehaviour
 		Player2LivesDisplay.fillAmount = Player2Controller.PlayerLives / 3.0f;
 
 		if (Player1Controller.PlayerLives <= 0)
-			PlayerWon(1);
+			PlayerWon(2);
 		else if (Player2Controller.PlayerLives <= 0)
 			PlayerWon(1);
 	}
@@ -116,6 +117,16 @@ public class GameManager : MonoBehaviour
 
 	private void PlayerWon(int Player)
 	{
+		Time.timeScale = 0;
+		WinScreen.gameObject.SetActive(true);
 
+		if (Player == 1)
+		{
+			WinScreen.GetChild(1).gameObject.SetActive(true);
+		}
+		else if (Player == 2)
+		{
+			WinScreen.GetChild(0).gameObject.SetActive(true);
+		}
 	}
 }
