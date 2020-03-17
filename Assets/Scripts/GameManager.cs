@@ -28,9 +28,9 @@ public class GameManager : MonoBehaviour
 		AsteroidSpawnTimer = AsteroidSpawnTime;
 
 		CameraFrustumCorners = new Vector3[4];
-		Camera.CalculateFrustumCorners(new Rect(0, 0, 1, 1), 11, Camera.MonoOrStereoscopicEye.Mono, CameraFrustumCorners);
+		Camera.CalculateFrustumCorners(new Rect(0, 0, 1, 1), 24, Camera.MonoOrStereoscopicEye.Mono, CameraFrustumCorners);
 		for (int i = 0; i < 4; ++i)
-			CameraFrustumCorners[i] *= 0.95f;	//Offset the corners inwards a little
+			CameraFrustumCorners[i] *= 0.93f;	//Offset the corners inwards a little
 		SceneWidth = (CameraFrustumCorners[2].x);
 		SceneHeight = (CameraFrustumCorners[2].y);
 
