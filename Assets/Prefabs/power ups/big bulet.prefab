@@ -219,6 +219,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 688341ff1316d3047b99d4001337ea0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NewBullet: {fileID: 0}
+  NewBullet: {fileID: 8031445612460290237, guid: 2a5070111565c7e45b503c8986010acf,
+    type: 3}
   PowerUpDuration: 7
   bigBullet: {fileID: 8300000, guid: 48922740b56933f4fb40df153a7fdcb8, type: 3}

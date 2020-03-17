@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 2769217114468581304}
   - component: {fileID: 8237368595441237138}
   m_Layer: 0
-  m_Name: BulletBig P2
+  m_Name: BulletBig
   m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8d4419eca0d454c41b60efa12718403e, type: 2}
+  - {fileID: 2100000, guid: 429417449383a1544a35fe4b44710506, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -314,7 +314,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 0, b: 0, a: 1}
+      maxColor: {r: 1, g: 0.9345745, b: 0, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -4800,7 +4800,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 21588279b895eef48a0448f7f2519813, type: 2}
+  - {fileID: 2100000, guid: 870181ef2d3fdd14cadbfa1651b731f1, type: 2}
   - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
