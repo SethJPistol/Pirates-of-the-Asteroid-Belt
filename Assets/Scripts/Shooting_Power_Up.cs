@@ -16,7 +16,7 @@ public class Shooting_Power_Up : MonoBehaviour
         {
             OriginalShootingDelay = other.gameObject.GetComponent<Pirate_Controller>().shootingDelay;
             
-            other.gameObject.GetComponent<Pirate_Controller>().MaxSpeed = NewShootingDelay;
+            other.gameObject.GetComponent<Pirate_Controller>().shootingDelay = NewShootingDelay;
            
             player = other;
             StartCoroutine(PowerUpWaitShoot());
