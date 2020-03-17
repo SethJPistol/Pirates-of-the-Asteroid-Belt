@@ -14,8 +14,9 @@ GameObject:
   - component: {fileID: 5796152850253941836}
   - component: {fileID: 2146832311746328167}
   - component: {fileID: 1339720072394622514}
+  - component: {fileID: 5435470093215484334}
   m_Layer: 0
-  m_Name: power up 2
+  m_Name: rapid fire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -207,3 +208,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &5435470093215484334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8177086839796841031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ccd9d88b9b339c48b06dd16cc61a29f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NewShootingDelay: 0.5
+  PowerUpDuration: 5
+  rapidfire: {fileID: 8300000, guid: c538fe95195807f40a7613d582835d38, type: 3}

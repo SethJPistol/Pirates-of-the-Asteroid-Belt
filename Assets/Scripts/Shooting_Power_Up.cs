@@ -9,7 +9,7 @@ public class Shooting_Power_Up : MonoBehaviour
     public float PowerUpDuration = 3.0f;
     Collider player;
     AudioSource mysource;
-    AudioClip rapidfire;
+    public AudioClip rapidfire;
 
     private void Start()
     {
