@@ -26,7 +26,7 @@ public class Shooting_Power_Up : MonoBehaviour
             player = other;
             StartCoroutine(PowerUpWaitShoot());
             gameObject.GetComponent<MeshRenderer>().enabled = false;
-            gameObject.GetComponent<BoxCollider>().enabled = false;
+            gameObject.GetComponent<Collider>().enabled = false;
 
             mysource.PlayOneShot(rapidfire, 0.5f);
             

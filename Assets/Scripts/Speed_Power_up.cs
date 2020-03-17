@@ -31,7 +31,7 @@ public class Speed_Power_up : MonoBehaviour
             player = other;
             StartCoroutine(PowerUpWait());
             gameObject.GetComponent<MeshRenderer>().enabled = false;
-            gameObject.GetComponent<BoxCollider>().enabled = false;
+            gameObject.GetComponent<Collider>().enabled = false;
             mysource.PlayOneShot(SpeedBoost, 0.5f);
 
 
