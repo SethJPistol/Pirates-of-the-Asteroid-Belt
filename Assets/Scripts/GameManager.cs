@@ -15,6 +15,9 @@ public class GameManager : MonoBehaviour
 	public GameObject AsteroidPrefab;
 
 	public int StartingAsteroidAmount = 3;
+	public int MaxAsteroidAmount = 5;
+	public float AsteroidSpawnTime = 5.0f;
+	private float AsteroidSpawnTimer;
 
 	private Vector3[] CameraFrustumCorners; //0 = bottom left, 1 = top left, 2 = top right, 3 = bottom right
 	private float SceneWidth;
@@ -22,6 +25,8 @@ public class GameManager : MonoBehaviour
 
 	void Start()
     {
+		AsteroidSpawnTimer = AsteroidSpawnTime;
+
 		CameraFrustumCorners = new Vector3[4];
 		Camera.CalculateFrustumCorners(new Rect(0, 0, 1, 1), 11, Camera.MonoOrStereoscopicEye.Mono, CameraFrustumCorners);
 		for (int i = 0; i < 4; ++i)
@@ -54,11 +59,40 @@ public class GameManager : MonoBehaviour
 			var worldSpaceCorner = Camera.transform.TransformVector(CameraFrustumCorners[i]);
 			Debug.DrawRay(Camera.transform.position, worldSpaceCorner, Color.blue);
 		}
+
+		if (AsteroidSpawnTimer > 0.0f)
+			AsteroidSpawnTimer -= Time.deltaTime;
+		else
+		{
+			GameObject[] Asteroids = GameObject.FindGameObjectsWithTag("Asteroid");
+			Debug.Log(Asteroids.Length);
+			if (Asteroids.Length < MaxAsteroidAmount)
+				SpawnAsteroid();
+
+			AsteroidSpawnTimer = AsteroidSpawnTime;	//Reset the timer each time, even if no asteroid was spawned
+		}
 	}
 
 	private void SpawnAsteroid()
 	{
-
+		Vector3 Spawnpoint;
+		if (Random.value > 0.5f)
+			Spawnpoint = new Vector3(SceneWidth, 0.0f, Random.Range(-SceneHeight, SceneHeight));
+		else
+			Spawnpoint = new Vector3(-SceneWidth, 0.0f, Random.Range(-SceneHeight, SceneHeight));
+		bool Spawning = true;
+		while (Spawning)
+		{
+			if (Player1SafeZone.bounds.Contains(Spawnpoint) || Player2SafeZone.bounds.Contains(Spawnpoint))    //If too close to a player,
+			{
+				Spawnpoint = new Vector3(Random.Range(-1.0f, 1.0f), 0.0f, Random.Range(-1.0f, 1.0f));
+				Spawnpoint.x *= SceneWidth;
+				Spawnpoint.z *= SceneHeight;
+			}
+			else
+				Spawning = false;
+		}
+		SpawnAsteroid(Spawnpoint);
 	}
 
 	private void SpawnAsteroid(Vector3 StartPosition)
