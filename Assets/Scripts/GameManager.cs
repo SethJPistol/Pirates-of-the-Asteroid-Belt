@@ -74,7 +74,13 @@ public class GameManager : MonoBehaviour
 			else
 			{
 				GameObject[] Asteroids = GameObject.FindGameObjectsWithTag("Asteroid");
-				if (Asteroids.Length < MaxAsteroidAmount)
+				int count = 0;
+				foreach (GameObject asteroid in Asteroids)
+				{
+					if (asteroid.GetComponent<Asteroid>().Type == Asteroid.AsteroidType.Large)
+						++count;
+				}
+				if (count < MaxAsteroidAmount)
 					SpawnAsteroid();
 
 				AsteroidSpawnTimer = AsteroidSpawnTime; //Reset the timer each time, even if no asteroid was spawned
