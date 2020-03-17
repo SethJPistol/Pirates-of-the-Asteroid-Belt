@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using XboxCtrlrInput;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -25,6 +27,8 @@ public class GameManager : MonoBehaviour
 	public RectTransform WinScreen;
 	public Image Player1LivesDisplay;
 	public Image Player2LivesDisplay;
+
+	private bool GameOver = false;
 
 	private Vector3[] CameraFrustumCorners; //0 = bottom left, 1 = top left, 2 = top right, 3 = bottom right
 	private float SceneWidth;
@@ -63,24 +67,40 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-		if (AsteroidSpawnTimer > 0.0f)
-			AsteroidSpawnTimer -= Time.deltaTime;
+		if (!GameOver)
+		{
+			if (AsteroidSpawnTimer > 0.0f)
+				AsteroidSpawnTimer -= Time.deltaTime;
+			else
+			{
+				GameObject[] Asteroids = GameObject.FindGameObjectsWithTag("Asteroid");
+				if (Asteroids.Length < MaxAsteroidAmount)
+					SpawnAsteroid();
+
+				AsteroidSpawnTimer = AsteroidSpawnTime; //Reset the timer each time, even if no asteroid was spawned
+			}
+
+			Player1LivesDisplay.fillAmount = Player1Controller.PlayerLives / 3.0f;
+			Player2LivesDisplay.fillAmount = Player2Controller.PlayerLives / 3.0f;
+
+			if (Player1Controller.PlayerLives <= 0)
+				PlayerWon(2);
+			else if (Player2Controller.PlayerLives <= 0)
+				PlayerWon(1);
+		}
 		else
 		{
-			GameObject[] Asteroids = GameObject.FindGameObjectsWithTag("Asteroid");
-			if (Asteroids.Length < MaxAsteroidAmount)
-				SpawnAsteroid();
-
-			AsteroidSpawnTimer = AsteroidSpawnTime;	//Reset the timer each time, even if no asteroid was spawned
+			if (GetButtonDownAny(XboxButton.A))
+			{
+				Time.timeScale = 1;
+				SceneManager.LoadScene(1);
+			}
+			else if (GetButtonDownAny(XboxButton.B))
+			{
+				Time.timeScale = 1;
+				SceneManager.LoadScene(0);
+			}
 		}
-
-		Player1LivesDisplay.fillAmount = Player1Controller.PlayerLives / 3.0f;
-		Player2LivesDisplay.fillAmount = Player2Controller.PlayerLives / 3.0f;
-
-		if (Player1Controller.PlayerLives <= 0)
-			PlayerWon(2);
-		else if (Player2Controller.PlayerLives <= 0)
-			PlayerWon(1);
 	}
 
 	private void SpawnAsteroid()
@@ -118,6 +138,7 @@ public class GameManager : MonoBehaviour
 	private void PlayerWon(int Player)
 	{
 		Time.timeScale = 0;
+		GameOver = true;
 		WinScreen.gameObject.SetActive(true);
 
 		if (Player == 1)
@@ -128,5 +149,16 @@ public class GameManager : MonoBehaviour
 		{
 			WinScreen.GetChild(0).gameObject.SetActive(true);
 		}
+	}
+
+	//Checks if any controller has the specified button pressed
+	public bool GetButtonDownAny(XboxButton button)
+	{
+		if (XCI.GetButtonDown(button, XboxController.First)
+			|| XCI.GetButtonDown(button, XboxController.Second)
+			|| XCI.GetButtonDown(button, XboxController.Third)
+			|| XCI.GetButtonDown(button, XboxController.Fourth))
+			return true;
+		return false;
 	}
 }
