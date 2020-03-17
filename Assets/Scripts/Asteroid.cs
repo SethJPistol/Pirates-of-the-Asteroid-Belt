@@ -20,10 +20,6 @@ public class Asteroid : MonoBehaviour
 
 	public float MaxSpeed = 1.5f;
 
-	[HideInInspector]
-	public delegate void WrapHandler(GameObject Object);	//Delegate type to call when wrapping around the screen
-	private WrapHandler Handler = null;					//A handler to hold the function
-
 	private void Awake()
 	{
 		rb = GetComponent<Rigidbody>();
@@ -32,11 +28,6 @@ public class Asteroid : MonoBehaviour
 	private void Update()
 	{
 		Velocity = rb.velocity;
-	}
-
-	public void SetWrapHandler(WrapHandler WrapFunction)
-	{
-		Handler = WrapFunction;
 	}
 
 	private void OnCollisionEnter(Collision collision)
@@ -71,7 +62,6 @@ public class Asteroid : MonoBehaviour
 	{
 		Asteroid Asteroid1 = Instantiate(SmallAsteroidPrefab).GetComponent<Asteroid>();
 		Asteroid1.Type = AsteroidType.Small;
-		Asteroid1.SetWrapHandler(Handler);
 		Asteroid1.transform.position = rb.position;
 		Asteroid1.transform.rotation = Quaternion.LookRotation(Velocity.normalized);
 		Asteroid1.transform.Rotate(0.0f, 90.0f, 0.0f);
@@ -79,7 +69,6 @@ public class Asteroid : MonoBehaviour
 
 		Asteroid Asteroid2 = Instantiate(SmallAsteroidPrefab).GetComponent<Asteroid>();
 		Asteroid2.Type = AsteroidType.Small;
-		Asteroid2.SetWrapHandler(Handler);
 		Asteroid2.transform.position = transform.position;
 		Asteroid2.transform.rotation = Quaternion.LookRotation(Velocity.normalized);
 		Asteroid2.transform.Rotate(0.0f, -90.0f, 0.0f);
@@ -88,7 +77,6 @@ public class Asteroid : MonoBehaviour
 
 	private void OnBecameInvisible()
 	{
-		if (Handler != null)
-			Handler(gameObject);
+		ScreenWrap.Instance.Wrap(gameObject);
 	}
 }

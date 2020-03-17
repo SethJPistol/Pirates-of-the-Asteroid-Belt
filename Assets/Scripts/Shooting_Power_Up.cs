@@ -8,8 +8,13 @@ public class Shooting_Power_Up : MonoBehaviour
     private float OriginalShootingDelay;
     public float PowerUpDuration = 3.0f;
     Collider player;
+    AudioSource mysource;
+    AudioClip rapidfire;
 
-
+    private void Start()
+    {
+        mysource = GetComponent<AudioSource>();
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
@@ -23,7 +28,7 @@ public class Shooting_Power_Up : MonoBehaviour
             gameObject.GetComponent<MeshRenderer>().enabled = false;
             gameObject.GetComponent<BoxCollider>().enabled = false;
 
-
+            mysource.PlayOneShot(rapidfire, 0.5f);
             
         }
 
