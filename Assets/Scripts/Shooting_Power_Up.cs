@@ -5,20 +5,31 @@ using UnityEngine;
 public class Shooting_Power_Up : MonoBehaviour
 {
     public float NewShootingDelay = 0.5f;
-    public float OriginalShootingDelay;
+    private float OriginalShootingDelay;
     public float PowerUpDuration = 3.0f;
-    void OnCollisionEnter(Collision collision)
+    Collider player;
+
+
+    private void OnTriggerEnter(Collider other)
     {
-        OriginalShootingDelay = collision.gameObject.GetComponent<Pirate_Controller>().shootingDelay;
+        if (other.gameObject.tag == "Player")
+        {
+            OriginalShootingDelay = other.gameObject.GetComponent<Pirate_Controller>().shootingDelay;
+            
+            other.gameObject.GetComponent<Pirate_Controller>().MaxSpeed = NewShootingDelay;
+           
+            player = other;
+            StartCoroutine(PowerUpWait());
 
-        collision.gameObject.GetComponent<Pirate_Controller>().shootingDelay = NewShootingDelay;
 
-        StartCoroutine(PowerUpWait());
-        collision.gameObject.GetComponent<Pirate_Controller>().shootingDelay = OriginalShootingDelay;
-        Destroy(gameObject);
+            Destroy(gameObject);
+        }
+
     }
-    public IEnumerator PowerUpWait()
+    IEnumerator PowerUpWait()
     {
         yield return new WaitForSeconds(PowerUpDuration);
+        player.gameObject.GetComponent<Pirate_Controller>().shootingDelay = OriginalShootingDelay;
+
     }
 }

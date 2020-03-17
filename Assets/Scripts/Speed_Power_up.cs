@@ -9,27 +9,34 @@ public class Speed_Power_up : MonoBehaviour
     public float PowerUpDuration = 3;
 
     //original speeds;
-    private float OriginalMoveSpeed;
-    private float OriginalMaxSpeed;
+    [HideInInspector]public float OriginalMoveSpeed;
+    [HideInInspector]public float OriginalMaxSpeed;
+    Collider player;
    
-    private void OnCollisionEnter(Collision collision)
+    
+    private void OnTriggerEnter(Collider other)
     {
-        OriginalMaxSpeed =  collision.gameObject.GetComponent<Pirate_Controller>().MaxSpeed;
-        OriginalMoveSpeed = collision.gameObject.GetComponent<Pirate_Controller>().MoveSpeed;
+        if (other.gameObject.tag == "Player")
+        {
+            OriginalMaxSpeed = other.gameObject.GetComponent<Pirate_Controller>().MaxSpeed;
+            OriginalMoveSpeed = other.gameObject.GetComponent<Pirate_Controller>().MoveSpeed;
 
-        collision.gameObject.GetComponent<Pirate_Controller>().MaxSpeed = NewMaxSpeed;
-        collision.gameObject.GetComponent<Pirate_Controller>().MoveSpeed = NewMoveSpeed;
+            other.gameObject.GetComponent<Pirate_Controller>().MaxSpeed = NewMaxSpeed;
+            other.gameObject.GetComponent<Pirate_Controller>().MoveSpeed = NewMoveSpeed;
+            player = other;
+            StartCoroutine(PowerUpWait());
+            
 
-        StartCoroutine(PowerUpWait());
-
-        collision.gameObject.GetComponent<Pirate_Controller>().MaxSpeed = OriginalMaxSpeed;
-        collision.gameObject.GetComponent<Pirate_Controller>().MoveSpeed = OriginalMoveSpeed;
-
-        Destroy(gameObject);
+            Destroy(gameObject);
+        }
+        
     }
-
-    public IEnumerator PowerUpWait()
+    IEnumerator PowerUpWait()
     {
         yield return new WaitForSeconds(PowerUpDuration);
+        player.gameObject.GetComponent<Pirate_Controller>().MaxSpeed = OriginalMaxSpeed;
+        player.gameObject.GetComponent<Pirate_Controller>().MoveSpeed = OriginalMoveSpeed;
+
     }
+
 }

@@ -116,14 +116,14 @@ public class Pirate_Controller : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag != "Player")
+        if (collision.gameObject.tag == "Bullet" && collision.gameObject.tag == "Asteroid")
         {
             PlayerLives--;
             gameObject.transform.position = SpawnPos;
             gameObject.transform.rotation = SpawnRot;
             rb.velocity = spawnvel;
+            
         }
     }
-
-
+   
 }
