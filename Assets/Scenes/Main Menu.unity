@@ -274,6 +274,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 234945426}
   m_CullTransparentMesh: 0
+--- !u!1 &378169937 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2370883635766401498, guid: 8d0732b15503e0042a736446a79398d6,
+    type: 3}
+  m_PrefabInstance: {fileID: 1719607311}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &459782766
 GameObject:
   m_ObjectHideFlags: 0
@@ -363,12 +369,12 @@ GameObject:
   - component: {fileID: 558199908}
   - component: {fileID: 558199907}
   m_Layer: 5
-  m_Name: imstusons
+  m_Name: Instructions
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &558199906
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1114,6 +1120,9 @@ MonoBehaviour:
   Camera: {fileID: 583729238}
   TitleScreenPanel: {fileID: 881792111}
   ReadyScreenPanel: {fileID: 1653635546}
+  InstructionsScreenPanel: {fileID: 558199906}
+  BackgroundBoat1: {fileID: 1397185843}
+  BackgroundBoat2: {fileID: 378169937}
   ReadyPlayer1Text: {fileID: 1091481599}
   ReadyPlayer2Text: {fileID: 1601367042}
   CountdownText: {fileID: 216947305}
@@ -1131,6 +1140,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1397185843 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2370883635766401498, guid: e4e531ad5a327cc4687cb76cebd3665e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1743806216}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1572026396
 GameObject:
   m_ObjectHideFlags: 0
