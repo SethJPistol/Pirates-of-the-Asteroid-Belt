@@ -30,9 +30,12 @@ public class GameManager : MonoBehaviour
 		CameraFrustumCorners = new Vector3[4];
 		Camera.CalculateFrustumCorners(new Rect(0, 0, 1, 1), 24, Camera.MonoOrStereoscopicEye.Mono, CameraFrustumCorners);
 		for (int i = 0; i < 4; ++i)
-			CameraFrustumCorners[i] *= 0.93f;	//Offset the corners inwards a little
+			CameraFrustumCorners[i] *= 0.91f;	//Offset the corners inwards a little
 		SceneWidth = (CameraFrustumCorners[2].x);
 		SceneHeight = (CameraFrustumCorners[2].y);
+
+		Player1.GetComponent<Pirate_Controller>().SetWrapHandler(Wrap);
+		Player2.GetComponent<Pirate_Controller>().SetWrapHandler(Wrap);
 
 		//Spawn a few asteroids around on the screen
 		for (int i = 0; i < StartingAsteroidAmount; ++i)
@@ -65,7 +68,6 @@ public class GameManager : MonoBehaviour
 		else
 		{
 			GameObject[] Asteroids = GameObject.FindGameObjectsWithTag("Asteroid");
-			Debug.Log(Asteroids.Length);
 			if (Asteroids.Length < MaxAsteroidAmount)
 				SpawnAsteroid();
 

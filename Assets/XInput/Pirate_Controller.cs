@@ -33,10 +33,14 @@ public class Pirate_Controller : MonoBehaviour
     //delay between shots
     public float shootingDelay = 2.0f;
     [HideInInspector] public bool canShootAgain = true;
-    
 
-    // Start is called before the first frame update
-    void Start()
+	[HideInInspector]
+	public delegate void WrapHandler(GameObject Object);    //Delegate type to call when wrapping around the screen
+	private WrapHandler Handler = null;						//A handler to hold the function
+
+
+	// Start is called before the first frame update
+	void Start()
     {
         // debug num of contollers connected
         if (!CheckNumControlers)
@@ -72,8 +76,8 @@ public class Pirate_Controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // get move input
-        Vector3 moveInput = new Vector3(XCI.GetAxisRaw(XboxAxis.LeftStickX, Controller), 0.0f, XCI.GetAxisRaw(XboxAxis.LeftStickY, Controller));
+		// get move input
+		Vector3 moveInput = new Vector3(XCI.GetAxisRaw(XboxAxis.LeftStickX, Controller), 0.0f, XCI.GetAxisRaw(XboxAxis.LeftStickY, Controller));
         rb.AddForce  (moveInput.normalized * MoveSpeed);
         if(rb.velocity.magnitude > MaxSpeed)
         {
@@ -113,7 +117,19 @@ public class Pirate_Controller : MonoBehaviour
         }
     }
 
-    public IEnumerator shootdelay()
+	public void SetWrapHandler(WrapHandler WrapFunction)
+	{
+		Handler = WrapFunction;
+	}
+
+	private void OnBecameInvisible()	//When this object leaves the camera's view,
+	{
+		if (Handler != null)		//If the handler has been set,
+			Handler(gameObject);    //Make the object wrap back around
+		Debug.Log("Wrap!");
+	}
+
+	public IEnumerator shootdelay()
     {
         canShootAgain = false;
         yield return new WaitForSeconds(shootingDelay);

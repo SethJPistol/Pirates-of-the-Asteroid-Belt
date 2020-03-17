@@ -659,6 +659,11 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1117237498767643475, guid: 8d0732b15503e0042a736446a79398d6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1638267661558377417, guid: 8d0732b15503e0042a736446a79398d6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -720,6 +725,11 @@ PrefabInstance:
       value: Fixed Longspace P2
       objectReference: {fileID: 0}
     - target: {fileID: 2370883635766401498, guid: 8d0732b15503e0042a736446a79398d6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3508897923052391089, guid: 8d0732b15503e0042a736446a79398d6,
         type: 3}
       propertyPath: m_IsActive
       value: 1
