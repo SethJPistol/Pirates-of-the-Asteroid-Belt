@@ -19,17 +19,19 @@ public class Shooting_Power_Up : MonoBehaviour
             other.gameObject.GetComponent<Pirate_Controller>().MaxSpeed = NewShootingDelay;
            
             player = other;
-            StartCoroutine(PowerUpWait());
+            StartCoroutine(PowerUpWaitShoot());
+            gameObject.GetComponent<MeshRenderer>().enabled = false;
+            gameObject.GetComponent<BoxCollider>().enabled = false;
 
 
-            Destroy(gameObject);
+            
         }
 
     }
-    IEnumerator PowerUpWait()
+    IEnumerator PowerUpWaitShoot()
     {
         yield return new WaitForSeconds(PowerUpDuration);
         player.gameObject.GetComponent<Pirate_Controller>().shootingDelay = OriginalShootingDelay;
-
+        Destroy(gameObject);
     }
 }

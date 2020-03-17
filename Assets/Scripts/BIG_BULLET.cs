@@ -15,14 +15,17 @@ public class BIG_BULLET : MonoBehaviour
             OriginalBullet = other.gameObject.GetComponent<Pirate_Controller>().GetComponentInChildren<Cannon>().bullet;
             other.gameObject.GetComponent<Pirate_Controller>().GetComponentInChildren<Cannon>().bullet = NewBullet;
 
-            StartCoroutine(PowerUpWait());
+            StartCoroutine(PowerUpWaitBIG());
+            gameObject.GetComponent<MeshRenderer>().enabled = false;
+            gameObject.GetComponent<BoxCollider>().enabled = false;
 
-            Destroy(gameObject);
+            
         }
     }
-    IEnumerator PowerUpWait()
+    IEnumerator PowerUpWaitBIG()
     {
         yield return new WaitForSeconds(PowerUpDuration);
         player.gameObject.GetComponent<Pirate_Controller>().GetComponentInChildren<Cannon>().bullet = OriginalBullet;
+        Destroy(gameObject);
     }
 }

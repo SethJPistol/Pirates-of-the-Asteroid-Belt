@@ -25,9 +25,10 @@ public class Speed_Power_up : MonoBehaviour
             other.gameObject.GetComponent<Pirate_Controller>().MoveSpeed = NewMoveSpeed;
             player = other;
             StartCoroutine(PowerUpWait());
-            
+            gameObject.GetComponent<MeshRenderer>().enabled = false;
+            gameObject.GetComponent<BoxCollider>().enabled = false;
 
-            Destroy(gameObject);
+            
         }
         
     }
@@ -36,6 +37,7 @@ public class Speed_Power_up : MonoBehaviour
         yield return new WaitForSeconds(PowerUpDuration);
         player.gameObject.GetComponent<Pirate_Controller>().MaxSpeed = OriginalMaxSpeed;
         player.gameObject.GetComponent<Pirate_Controller>().MoveSpeed = OriginalMoveSpeed;
+        Destroy(gameObject);
 
     }
 
