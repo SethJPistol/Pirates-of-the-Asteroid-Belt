@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Bullet_hit : MonoBehaviour
 {
+	//AudioSource mysource;
+	//public AudioClip astExplode;
+	
 	private void OnBecameInvisible()    //When this object leaves the camera's view,
 	{
 		ScreenWrap.Instance.Wrap(gameObject);
@@ -11,6 +14,13 @@ public class Bullet_hit : MonoBehaviour
 
 	private void OnCollisionEnter(Collision collision)
     {
-        Destroy(gameObject);
-    }
+        
+		//if(collision.gameObject.tag == "Asteroid")
+		//{
+		//	GameObject shotBullet = (GameObject)Instantiate(bullet, bulletSpawnPoint.transform.position, transform.rotation);
+		//	mysource.PlayOneShot(astExplode, 1.0f);
+		//}
+		Destroy(gameObject);
+	}
+
 }
