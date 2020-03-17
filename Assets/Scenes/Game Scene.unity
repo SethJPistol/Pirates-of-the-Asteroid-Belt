@@ -250,6 +250,7 @@ MonoBehaviour:
   StartingAsteroidAmount: 3
   MaxAsteroidAmount: 5
   AsteroidSpawnTime: 5
+  WinScreen: {fileID: 534332084}
   Player1LivesDisplay: {fileID: 2118760869}
   Player2LivesDisplay: {fileID: 1367935189}
 --- !u!4 &105985294
@@ -437,6 +438,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!224 &534332084 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 1908688292274932744, guid: 7f166495d81ed75408b857b54e006bfa,
+    type: 3}
+  m_PrefabInstance: {fileID: 1240389692}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &656884387
 PrefabInstance:
   m_ObjectHideFlags: 0

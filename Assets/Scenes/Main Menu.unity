@@ -1346,7 +1346,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fixed Longspace P2
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7340594769605094124, guid: 8d0732b15503e0042a736446a79398d6, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 8d0732b15503e0042a736446a79398d6, type: 3}
 --- !u!1001 &1743806216
 PrefabInstance:
@@ -1415,5 +1416,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fixed Longspace p 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7340594769605094124, guid: e4e531ad5a327cc4687cb76cebd3665e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: e4e531ad5a327cc4687cb76cebd3665e, type: 3}
