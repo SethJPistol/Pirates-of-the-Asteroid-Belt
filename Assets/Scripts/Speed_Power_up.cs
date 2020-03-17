@@ -29,6 +29,12 @@ public class Speed_Power_up : MonoBehaviour
             other.gameObject.GetComponent<Pirate_Controller>().MaxSpeed = NewMaxSpeed;
             other.gameObject.GetComponent<Pirate_Controller>().MoveSpeed = NewMoveSpeed;
             player = other;
+
+            other.gameObject.GetComponent<Pirate_Controller>().jetoriginal1.GetComponent<ParticleSystem>().Stop();
+            other.gameObject.GetComponent<Pirate_Controller>().jetoriginal2.GetComponent<ParticleSystem>().Stop();
+            other.gameObject.GetComponent<Pirate_Controller>().newjetparent.SetActive(true);
+            other.gameObject.GetComponent<Pirate_Controller>().jetnew1.GetComponent<ParticleSystem>().Play();
+            other.gameObject.GetComponent<Pirate_Controller>().jetnew2.GetComponent<ParticleSystem>().Play();
             StartCoroutine(PowerUpWait());
             gameObject.GetComponent<MeshRenderer>().enabled = false;
             gameObject.GetComponent<Collider>().enabled = false;
@@ -43,6 +49,12 @@ public class Speed_Power_up : MonoBehaviour
         yield return new WaitForSeconds(PowerUpDuration);
         player.gameObject.GetComponent<Pirate_Controller>().MaxSpeed = OriginalMaxSpeed;
         player.gameObject.GetComponent<Pirate_Controller>().MoveSpeed = OriginalMoveSpeed;
+        player.gameObject.GetComponent<Pirate_Controller>().jetoriginal1.GetComponent<ParticleSystem>().Play();
+        player.gameObject.GetComponent<Pirate_Controller>().jetoriginal2.GetComponent<ParticleSystem>().Play();
+        player.gameObject.GetComponent<Pirate_Controller>().jetnew1.GetComponent<ParticleSystem>().Stop();
+        player.gameObject.GetComponent<Pirate_Controller>().jetnew2.GetComponent<ParticleSystem>().Stop();
+        player.gameObject.GetComponent<Pirate_Controller>().newjetparent.SetActive(false);
+        
         Destroy(gameObject);
 
     }

@@ -42,6 +42,16 @@ public class Pirate_Controller : MonoBehaviour
     public AudioClip Shot;
     public AudioClip PlayerDeath;
 
+
+    //particles
+    public ParticleSystem jetoriginal1;
+    public ParticleSystem jetoriginal2;
+
+    public GameObject newjetparent;
+    public ParticleSystem jetnew1;
+    public ParticleSystem jetnew2;
+    
+
 	// Start is called before the first frame update
 	void Start()
     {
