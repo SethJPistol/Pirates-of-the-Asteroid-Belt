@@ -20,9 +20,13 @@ public class Asteroid : MonoBehaviour
 
 	public float MaxSpeed = 1.5f;
 
+	AudioSource mysource;
+	AudioClip astExplode;
+
 	private void Awake()
 	{
 		rb = GetComponent<Rigidbody>();
+		mysource = GetComponent<AudioSource>();
 	}
 
 	private void Update()
@@ -43,6 +47,7 @@ public class Asteroid : MonoBehaviour
 			{
 				Destroy(gameObject);
 			}
+			mysource.PlayOneShot(astExplode, 0.25f);
 		}
 		else if (collision.gameObject.CompareTag("Player"))
 		{
@@ -55,6 +60,7 @@ public class Asteroid : MonoBehaviour
 			{
 				Destroy(gameObject);
 			}
+			mysource.PlayOneShot(astExplode, 0.25f);
 		}
 	}
 
