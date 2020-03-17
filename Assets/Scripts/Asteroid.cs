@@ -23,6 +23,12 @@ public class Asteroid : MonoBehaviour
 	AudioSource mysource;
 	public AudioClip astExplode;
 
+	//powerups
+	public GameObject SpeedPowerUp;
+	public GameObject RapidFire;
+	public GameObject BigBullet;
+
+
 	private void Awake()
 	{
 		rb = GetComponent<Rigidbody>();
@@ -46,7 +52,7 @@ public class Asteroid : MonoBehaviour
 			mysource.PlayOneShot(astExplode, 0.5f);
 			if (Type == AsteroidType.Large)
 			{
-				
+				spawnPowerUp();
 				Split();
 				Destroy(gameObject);
 			}
@@ -93,5 +99,24 @@ public class Asteroid : MonoBehaviour
 	private void OnBecameInvisible()
 	{
 		ScreenWrap.Instance.Wrap(gameObject);
+	}
+	void spawnPowerUp()
+	{
+		int poweruprnage = Random.Range(1, 15);
+		if(poweruprnage == 3)
+		{
+			GameObject speedboost = (GameObject)Instantiate(SpeedPowerUp, rb.transform.position, rb.transform.rotation);
+		}
+		if(poweruprnage == 6)
+		{
+			GameObject speedboost = (GameObject)Instantiate(RapidFire, rb.transform.position, rb.transform.rotation);
+		}
+		if(poweruprnage == 12)
+		{
+			GameObject speedboost = (GameObject)Instantiate(BigBullet, rb.transform.position, rb.transform.rotation);
+		}
+		
+
+		
 	}
 }

@@ -101,6 +101,12 @@ MonoBehaviour:
   Type: 0
   MaxSpeed: 1.5
   astExplode: {fileID: 8300000, guid: 2d783d8711d9b8746a454034cb424ea7, type: 3}
+  SpeedPowerUp: {fileID: 6068308146028053573, guid: 078524199b2960b42a05db11e1ce987f,
+    type: 3}
+  RapidFire: {fileID: 8177086839796841031, guid: 99219827d446028409042ac4363dab8e,
+    type: 3}
+  BigBullet: {fileID: 158539199245206624, guid: 5aecc8dd46dc7a345979217d1c5267c7,
+    type: 3}
 --- !u!54 &7477649461401502707
 Rigidbody:
   m_ObjectHideFlags: 0

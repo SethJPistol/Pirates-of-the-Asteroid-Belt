@@ -9,7 +9,7 @@ public class BIG_BULLET : MonoBehaviour
     public float PowerUpDuration = 3.0f;
     Collider player;
     AudioSource mysource;
-    AudioClip bigBullet;
+    public AudioClip bigBullet;
     private void Start()
     {
         mysource = GetComponent<AudioSource>();
