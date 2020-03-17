@@ -20,9 +20,9 @@ public class Asteroid : MonoBehaviour
 	public AsteroidType Type;
 
 	public float MaxSpeed = 1.5f;
-
-	AudioSource mysource;
-	public AudioClip astExplode;
+	//audio
+	//AudioSource mysource;
+	//public AudioClip astExplode;
 
 	//powerups
 	public GameObject SpeedPowerUp;
@@ -35,10 +35,10 @@ public class Asteroid : MonoBehaviour
 		rb = GetComponent<Rigidbody>();
 		
 	}
-	private void Start()
-	{
-		mysource = GetComponent<AudioSource>();
-	}
+	//private void Start()
+	//{
+	//	mysource = GetComponent<AudioSource>();
+	//}
 
 
 	private void Update()
@@ -50,7 +50,7 @@ public class Asteroid : MonoBehaviour
 	{
 		if (collision.gameObject.CompareTag("Bullet"))
 		{
-			mysource.PlayOneShot(astExplode, 0.5f);
+			//mysource.PlayOneShot(astExplode, 0.5f);
 			Instantiate(ExplosionPrefab, gameObject.transform.position, gameObject.transform.rotation);
 
 			if (Type == AsteroidType.Large)
@@ -67,7 +67,7 @@ public class Asteroid : MonoBehaviour
 		}
 		else if (collision.gameObject.CompareTag("Player"))
 		{
-			mysource.PlayOneShot(astExplode, 0.25f);
+			//mysource.PlayOneShot(astExplode, 0.25f);
 			Instantiate(ExplosionPrefab, gameObject.transform.position, gameObject.transform.rotation);
 
 			if (Type == AsteroidType.Large)

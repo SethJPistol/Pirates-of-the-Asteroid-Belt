@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4176278633549973813}
   - component: {fileID: 7477649461401502707}
   - component: {fileID: 8091186443098229450}
-  - component: {fileID: 4068938210065135963}
+  - component: {fileID: 6886781478588914295}
   m_Layer: 8
   m_Name: LargeAsteroid
   m_TagString: Asteroid
@@ -101,7 +101,7 @@ MonoBehaviour:
   rb: {fileID: 0}
   Type: 0
   MaxSpeed: 1.5
-  astExplode: {fileID: 8300000, guid: 2d783d8711d9b8746a454034cb424ea7, type: 3}
+  astExplode: {fileID: 8300000, guid: b2333a87afb4db04a980ae21897b91b2, type: 3}
   SpeedPowerUp: {fileID: 6068308146028053573, guid: 078524199b2960b42a05db11e1ce987f,
     type: 3}
   RapidFire: {fileID: 8177086839796841031, guid: 99219827d446028409042ac4363dab8e,
@@ -137,7 +137,7 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1.3111458
   m_Center: {x: 0.02145654, y: 0.98624545, z: 0.039395392}
---- !u!82 &4068938210065135963
+--- !u!82 &6886781478588914295
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -158,7 +158,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 10000
+  MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
