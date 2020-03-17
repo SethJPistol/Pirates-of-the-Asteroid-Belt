@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class GameManager : MonoBehaviour
 
 	public GameObject Player1;
 	public GameObject Player2;
+	private Pirate_Controller Player1Controller;
+	private Pirate_Controller Player2Controller;
 
 	public Collider Player1SafeZone;
 	public Collider Player2SafeZone;
@@ -19,6 +22,9 @@ public class GameManager : MonoBehaviour
 	public float AsteroidSpawnTime = 5.0f;
 	private float AsteroidSpawnTimer;
 
+	public Image Player1LivesDisplay;
+	public Image Player2LivesDisplay;
+
 	private Vector3[] CameraFrustumCorners; //0 = bottom left, 1 = top left, 2 = top right, 3 = bottom right
 	private float SceneWidth;
 	private float SceneHeight;
@@ -26,6 +32,9 @@ public class GameManager : MonoBehaviour
 	void Start()
     {
 		AsteroidSpawnTimer = AsteroidSpawnTime;
+
+		Player1Controller = Player1.GetComponent<Pirate_Controller>();
+		Player2Controller = Player1.GetComponent<Pirate_Controller>();
 
 		CameraFrustumCorners = new Vector3[4];
 		Camera.CalculateFrustumCorners(new Rect(0, 0, 1, 1), 24, Camera.MonoOrStereoscopicEye.Mono, CameraFrustumCorners);
@@ -63,6 +72,14 @@ public class GameManager : MonoBehaviour
 
 			AsteroidSpawnTimer = AsteroidSpawnTime;	//Reset the timer each time, even if no asteroid was spawned
 		}
+
+		Player1LivesDisplay.fillAmount = Player1Controller.PlayerLives / 3.0f;
+		Player2LivesDisplay.fillAmount = Player2Controller.PlayerLives / 3.0f;
+
+		if (Player1Controller.PlayerLives <= 0)
+			PlayerWon(1);
+		else if (Player2Controller.PlayerLives <= 0)
+			PlayerWon(1);
 	}
 
 	private void SpawnAsteroid()
@@ -95,5 +112,10 @@ public class GameManager : MonoBehaviour
 		Vector3 Direction = new Vector3(Random.Range(-1.0f, 1.0f), 0.0f, Random.Range(-1.0f, 1.0f));
 		NewAsteroid.transform.rotation = Quaternion.LookRotation(Direction.normalized);
 		NewAsteroid.rb.velocity = NewAsteroid.MaxSpeed * NewAsteroid.transform.forward.normalized;
+	}
+
+	private void PlayerWon(int Player)
+	{
+
 	}
 }
