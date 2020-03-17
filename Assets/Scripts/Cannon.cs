@@ -7,8 +7,9 @@ public class Cannon : MonoBehaviour
     public GameObject bulletSpawnPoint;
     private Rigidbody rigb;
     public GameObject bullet;
-    // Start is called before the first frame update
-    void Start()
+
+	// Start is called before the first frame update
+	void Start()
     {
         rigb = gameObject.GetComponent<Rigidbody>();
     }
@@ -20,5 +21,4 @@ public class Cannon : MonoBehaviour
         // yield return new WaitForSeconds(shootingDelay);
         //canShootAgain = true;
     }
-
 }
