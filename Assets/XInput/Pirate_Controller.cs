@@ -28,6 +28,8 @@ public class Pirate_Controller : MonoBehaviour
     public GameObject cannonRight;
     public GameObject cannonLeft;
 
+	public MeshRenderer[] MeshesToFlash = null;
+
     public float bulletSpeed;
 
     //delay between shots
@@ -138,8 +140,12 @@ public class Pirate_Controller : MonoBehaviour
             rb.velocity = spawnvel;
 			StartCoroutine(Immunity());
             mysource.PlayOneShot(PlayerDeath, 1.0f);
-            
-        }
+			foreach (MeshRenderer mesh in MeshesToFlash)
+			{
+				StartCoroutine(MeshFlash(mesh));
+			}
+
+		}
     }
     public IEnumerator Immunity()
     {
@@ -147,5 +153,21 @@ public class Pirate_Controller : MonoBehaviour
 		yield return new WaitForSeconds(RespawnImmunity);
         gameObject.GetComponent<BoxCollider>().enabled = true;
     }
+
+	public IEnumerator MeshFlash(MeshRenderer mesh)
+	{
+		float Delay = RespawnImmunity / 6.0f;
+		mesh.enabled = false;
+		yield return new WaitForSeconds(Delay);
+		mesh.enabled = true;
+		yield return new WaitForSeconds(Delay);
+		mesh.enabled = false;
+		yield return new WaitForSeconds(Delay);
+		mesh.enabled = true;
+		yield return new WaitForSeconds(Delay);
+		mesh.enabled = false;
+		yield return new WaitForSeconds(Delay);
+		mesh.enabled = true;
+	}
 
 }

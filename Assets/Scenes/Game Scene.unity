@@ -1095,6 +1095,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5426532601535945761, guid: 8d0732b15503e0042a736446a79398d6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7340594769605094124, guid: 8d0732b15503e0042a736446a79398d6,
         type: 3}
       propertyPath: Shot
@@ -1105,6 +1110,11 @@ PrefabInstance:
       propertyPath: PlayerDeath
       value: 
       objectReference: {fileID: 8300000, guid: f1df0fb0069c81b40975ccd4de1ce1b2, type: 3}
+    - target: {fileID: 8841795149812544135, guid: 8d0732b15503e0042a736446a79398d6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8d0732b15503e0042a736446a79398d6, type: 3}
 --- !u!114 &2118760869 stripped
