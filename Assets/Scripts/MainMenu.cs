@@ -10,6 +10,7 @@ public class MainMenu : MonoBehaviour
     public enum Screen
     {
         TitleScreen,
+		CreditsScreen,
         ReadyScreen,
 		InstructionsScreen
     }
@@ -17,6 +18,7 @@ public class MainMenu : MonoBehaviour
 	public Camera Camera;
 
     public RectTransform TitleScreenPanel;
+	public RectTransform CreditsScreenPanel;
     public RectTransform ReadyScreenPanel;
 	public RectTransform InstructionsScreenPanel;
 
@@ -26,6 +28,8 @@ public class MainMenu : MonoBehaviour
 	public Text ReadyPlayer1Text;
 	public Text ReadyPlayer2Text;
 	public Text CountdownText;
+
+	public Text[] InstructionsPressAToStart;
 
 	private Screen CurrentScreen = Screen.TitleScreen;
 
@@ -38,6 +42,7 @@ public class MainMenu : MonoBehaviour
     void Start()
     {
 		TitleScreenPanel.gameObject.SetActive(true);
+		CreditsScreenPanel.gameObject.SetActive(false);
 		ReadyScreenPanel.gameObject.SetActive(false);
 		InstructionsScreenPanel.gameObject.SetActive(false);
 		ReadyPlayer1Text.text = "Not ready";
@@ -53,11 +58,17 @@ public class MainMenu : MonoBehaviour
         {
             case Screen.TitleScreen:
 
-				if (GetButtonDownAny(XboxButton.A) || Input.GetMouseButtonDown(0))
+				if (GetButtonDownAny(XboxButton.A))
 				{
 					CurrentScreen = Screen.ReadyScreen;
 					TitleScreenPanel.gameObject.SetActive(false);
 					ReadyScreenPanel.gameObject.SetActive(true);
+				}
+				else if (GetButtonDownAny(XboxButton.Y))
+				{
+					CurrentScreen = Screen.CreditsScreen;
+					TitleScreenPanel.gameObject.SetActive(false);
+					CreditsScreenPanel.gameObject.SetActive(true);
 				}
 				else if (GetButtonDownAny(XboxButton.B))
 				{
@@ -67,17 +78,28 @@ public class MainMenu : MonoBehaviour
 
 				break;
 
+			case Screen.CreditsScreen:
+
+				if (GetButtonDownAny(XboxButton.B) || GetButtonDownAny(XboxButton.A))
+				{
+					CurrentScreen = Screen.TitleScreen;
+					TitleScreenPanel.gameObject.SetActive(true);
+					CreditsScreenPanel.gameObject.SetActive(false);
+				}
+
+				break;
+
             case Screen.ReadyScreen:
 
 				if (ReadyTimerCountingDown)
 				{
 					ReadyTimer -= Time.deltaTime;
-					CountdownText.text = ((int)Mathf.Ceil(ReadyTimer)).ToString();
-					CountdownText.fontSize = 100 - ((int)Mathf.Ceil(ReadyTimer)) * 15;
 				}
-				if (ReadyTimer <= 0.0f || Input.GetMouseButtonDown(0))
+				if (ReadyTimer <= 0.0f)
 				{
 					CountdownText.text = "";
+					ReadyTimerCountingDown = false;
+					ReadyTimer = 3.0f;
 					CurrentScreen = Screen.InstructionsScreen;
 					ReadyScreenPanel.gameObject.SetActive(false);
 					InstructionsScreenPanel.gameObject.SetActive(true);
@@ -101,7 +123,7 @@ public class MainMenu : MonoBehaviour
 
 					if (ReadyPlayer1 && ReadyPlayer2 && !ReadyTimerCountingDown)
 					{
-						ReadyTimer = 3.0f;
+						ReadyTimer = 1.0f;
 						ReadyTimerCountingDown = true;
 					}
 				}
@@ -111,7 +133,7 @@ public class MainMenu : MonoBehaviour
 					ReadyScreenPanel.gameObject.SetActive(false);
 					TitleScreenPanel.gameObject.SetActive(true);
 
-					ReadyTimer = 3.0f;
+					ReadyTimer = 1.0f;
 					ReadyTimerCountingDown = false;
 					ReadyPlayer1 = false;
 					ReadyPlayer2 = false;
@@ -124,8 +146,25 @@ public class MainMenu : MonoBehaviour
 
 			case Screen.InstructionsScreen:
 
-				if (GetButtonDownAny(XboxButton.A) || Input.GetMouseButtonDown(0))
+				if (ReadyTimerCountingDown)
+				{
+					ReadyTimer -= Time.deltaTime;
+					CountdownText.text = ((int)Mathf.Ceil(ReadyTimer)).ToString();
+					CountdownText.fontSize = 100 - ((int)Mathf.Ceil(ReadyTimer)) * 15;
+				}
+				if (ReadyTimer <= 0.0f)
+				{
+					CountdownText.text = "";
 					SceneManager.LoadScene(1);
+				}
+
+				if (GetButtonDownAny(XboxButton.A) && !ReadyTimerCountingDown)
+				{
+					foreach (Text text in InstructionsPressAToStart)
+						text.text = "";
+					ReadyTimer = 3.0f;
+					ReadyTimerCountingDown = true;
+				}
 
 				break;
         }
