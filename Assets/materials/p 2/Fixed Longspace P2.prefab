@@ -168,7 +168,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 0
+  moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0
@@ -4875,7 +4875,7 @@ Transform:
   m_GameObject: {fileID: 2370883635766401498}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -6.55, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_Children:
   - {fileID: 4200461884822983591}
   - {fileID: 2636378005105933208}
@@ -4934,6 +4934,7 @@ MonoBehaviour:
   MoveSpeed: 10
   MaxSpeed: 30
   turnspeed: 2
+  PlayerLives: 3
   cannonRight: {fileID: 4903254112042315230}
   cannonLeft: {fileID: 6570244231051200323}
   bulletSpeed: 10
@@ -5105,7 +5106,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 0
+  moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0
@@ -10017,7 +10018,7 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 126
