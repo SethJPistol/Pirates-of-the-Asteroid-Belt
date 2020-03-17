@@ -12,20 +12,24 @@ public class BIG_BULLET : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            OriginalBullet = other.gameObject.GetComponent<Pirate_Controller>().GetComponentInChildren<Cannon>().bullet;
-            other.gameObject.GetComponent<Pirate_Controller>().GetComponentInChildren<Cannon>().bullet = NewBullet;
+            OriginalBullet = other.gameObject.GetComponent<Pirate_Controller>().cannonRight.GetComponent<Cannon>().bullet;
+            other.gameObject.GetComponent<Pirate_Controller>().cannonRight.GetComponent<Cannon>().bullet = NewBullet;
+            other.gameObject.GetComponent<Pirate_Controller>().cannonLeft.GetComponent<Cannon>().bullet = NewBullet;
 
             StartCoroutine(PowerUpWaitBIG());
+            player = other;
             gameObject.GetComponent<MeshRenderer>().enabled = false;
-            gameObject.GetComponent<BoxCollider>().enabled = false;
+            gameObject.GetComponent<Collider>().enabled = false;
 
             
         }
     }
-    IEnumerator PowerUpWaitBIG()
+    public IEnumerator PowerUpWaitBIG()
     {
         yield return new WaitForSeconds(PowerUpDuration);
-        player.gameObject.GetComponent<Pirate_Controller>().GetComponentInChildren<Cannon>().bullet = OriginalBullet;
+       // player.gameObject.GetComponent<Pirate_Controller>().GetComponentInChildren<Cannon>().bullet = OriginalBullet;
+        player.gameObject.GetComponent<Pirate_Controller>().cannonRight.GetComponent<Cannon>().bullet = OriginalBullet;
+        player.gameObject.GetComponent<Pirate_Controller>().cannonLeft.GetComponent<Cannon>().bullet = OriginalBullet;
         Destroy(gameObject);
     }
 }
